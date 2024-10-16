@@ -9,6 +9,7 @@ import com.cq.kt.model.activity.CouponInfo;
 import com.cq.kt.model.activity.CouponUse;
 import com.cq.kt.model.user.UserInfo;
 import com.cq.kt.utils.MethodExporter;
+import com.cq.kt.utils.RedisLimitAnnotation;
 import com.cq.kt.vo.activity.CouponUseQueryVo;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -70,6 +71,7 @@ public class CouponInfoServiceImpl extends ServiceImpl<CouponInfoMapper, CouponI
 
     //封装用户昵称和手机号
     @MethodExporter
+    @RedisLimitAnnotation(key = "redisLimit", permitsPerSecond = 3, expire = 10, msg = "当前排队人数较多，请稍后再试！")
     private CouponUse getUserInfoBycouponUse(CouponUse couponUse) {
         Long userId = couponUse.getUserId();
         if(!StringUtils.isEmpty(userId)) {
