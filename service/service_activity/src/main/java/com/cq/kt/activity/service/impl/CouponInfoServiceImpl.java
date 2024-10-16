@@ -8,6 +8,7 @@ import com.cq.kt.client.user.UserInfoFeignClient;
 import com.cq.kt.model.activity.CouponInfo;
 import com.cq.kt.model.activity.CouponUse;
 import com.cq.kt.model.user.UserInfo;
+import com.cq.kt.utils.MethodExporter;
 import com.cq.kt.vo.activity.CouponUseQueryVo;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -68,6 +69,7 @@ public class CouponInfoServiceImpl extends ServiceImpl<CouponInfoMapper, CouponI
     }
 
     //封装用户昵称和手机号
+    @MethodExporter
     private CouponUse getUserInfoBycouponUse(CouponUse couponUse) {
         Long userId = couponUse.getUserId();
         if(!StringUtils.isEmpty(userId)) {
